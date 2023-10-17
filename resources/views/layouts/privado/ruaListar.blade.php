@@ -15,7 +15,7 @@
 
     <div class="right-top"> 
         <div class="linha" class="superior">
-            <div class="title">BAIRROS</div>
+            <div class="title">RUAS</div>
         </div>
     
         <div class="linha">
@@ -55,27 +55,32 @@
                     <tr class="table-menu">
                         <th>ID</th>
                         <th>Nome</th>
+                        <th>ID Bairro</th>
+                        <th>Bairro</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($bairros as $bairro)
+                    @foreach ($ruas as $rua)
                     <tr>
-                        <td>{{ $bairro->id_bairro }}</td>
-                        <td>{{ $bairro->nome_bairro }}</td>
+                        <td>{{ $rua->id_rua }}</td>
+                        <td>{{ $rua->nome_rua }}</td>
+                        <td>{{ $rua->bairro->id_bairro }}</td>
+                        <td>{{ $rua->bairro->nome_bairro }}</td>
                         <td>
 
-                            <a href="{{ route('bairros.edit', ['id_bairro' => $bairro->id_bairro]) }}" class="btn-edit">Editar</a>
-        
-                                <button class="btn-delete" type="button" onclick="event.preventDefault(); if(confirm('Deseja realmente excluir este bairro?')) { document.getElementById('delete-form-{{ $bairro->id_bairro }}').submit(); }">
-                                    Excluir
-                                </button>
-                                
-                                <form id="delete-form-{{ $bairro->id_bairro }}" action="{{ route('bairro.destroy', ['id_bairro' => $bairro->id_bairro]) }}" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
+                            <a href="{{ route('ruas.edit', ['id_rua' => $rua->id_rua]) }}" class="btn-edit">Editar</a>
+
+                            <button class="btn-delete" type="button" onclick="event.preventDefault(); if(confirm('Deseja realmente excluir esta rua?')) { document.getElementById('delete-form-{{ $rua->id_rua }}').submit(); }">
+                                Excluir
                             </button>
+                            
+                            <form id="delete-form-{{ $rua->id_rua }}" action="{{ route('rua.destroy', ['id_rua' => $rua->id_rua]) }}" method="POST" style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </button>
+                            
 
                         </td>
                     </tr>
@@ -87,34 +92,37 @@
 
         <div class="overlay" id="overlay"></div>
 
-        <!-- Modal de Cadastro de Bairro (inicialmente oculto) -->
+        <!-- Modal de Cadastro de Rua (inicialmente oculto) -->
         <div id="modalCadastrar" style="display: none;">
             <button id="btnFecharModal">X</button>
-            <h2>Cadastrar Bairro</h2>
-            <form method="POST" action="{{ route('bairro.store') }}" enctype="multipart/form-data">
+            <h2>Cadastrar Rua</h2>
+            <form method="POST" action="{{ route('rua.store') }}" enctype="multipart/form-data">
                 @csrf
     
-                <!-- Campos para o cadastro de bairro -->
+                <!-- Campos para o cadastro de rua -->
                 <div class="input-field col s6">
 
-                    <select name="id_estado" id="id_estado">
-                        <option value="">Selecione um estado</option>
-                        @foreach ($estados as $id_estado => $nome_estado)
-                            <option value="{{ $id_estado }}">{{ $nome_estado }}</option>
-                        @endforeach
-                    </select>
-
-                    <select name="id_municipio" id="id_municipio">
-                        <option value="">Selecione um município</option>
-                    </select>
-
-                <span>Bairro: </span>
-                <input name="nome_bairro" placeholder="Nome Bairro" class="validate" type="text" id="nome_bairro" required >
-                <label for="nome_bairro"></label>
+                <span>Nome: </span>
+                <input name="nome_rua" placeholder="Nome Rua" class="validate" type="text" id="nome_rua" required >
+                <label for="nome_rua"></label>
                 </div>
+
+                <div class="input-field col s6">
+
+                    <span>Bairro: </span>
+                    <input name="nome_bairro" placeholder="Nome Bairro" class="validate" type="text" id="nome_bairro" required >
+                    <label for="nome_bairro"></label>
+                    </div>
                 <!-- Outros campos -->
     
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+
                 <button id="btnGravarModal" type="submit" name="action">Cadastrar</button>
+                
             </form>
     
             <!-- Botão para fechar o modal -->
@@ -126,7 +134,10 @@
             const btnCadastrar = document.getElementById('btnCadastrar');
             const modalCadastrar = document.getElementById('modalCadastrar');
             const btnFecharModal = document.getElementById('btnFecharModal');
-    
+            const btnGravarModal = document.getElementById('btnGravarModal');
+            const nomeBairroInput = document.getElementById('nome_bairro');
+            const bairroNaoCadastrado = document.getElementById('bairroNaoCadastrado');
+
             btnCadastrar.addEventListener('click', () => {
                 modalCadastrar.style.display = 'block';
                 document.getElementById('overlay').style.display = 'block';
@@ -137,31 +148,19 @@
                 document.getElementById('overlay').style.display = 'none';
             });
 
-        </script>
+            btnGravarModal.addEventListener('click', () => {
+                const nomeBairro = nomeBairroInput.value.trim();
 
-<script>
-    document.getElementById('id_estado').addEventListener('change', function() {
-        var selectedEstadoId = this.value;
-        var municipioDropdown = document.getElementById('id_municipio');
-
-        // Limpe o dropdown de municípios
-        municipioDropdown.innerHTML = '<option value="">Selecione um município</option>';
-
-        if (selectedEstadoId) {
-            // Preencha o dropdown de municípios com base no estado selecionado
-            @foreach ($municipios as $municipio)
-                if ({{ $municipio->id_estado }} == selectedEstadoId) {
-                    var option = document.createElement('option');
-                    option.value = {{ $municipio->id_municipio }};
-                    option.textContent = "{{ $municipio->nome_municipios }}";
-                    municipioDropdown.appendChild(option);
+                if (nomeBairro === '') {
+                    bairroNaoCadastrado.style.display = 'block';
+                } else {
+                    // Aqui você pode enviar o formulário se o nome do bairro não estiver vazio
+                    bairroNaoCadastrado.style.display = 'none';
+                    document.getElementById('form').submit(); // Certifique-se de dar um id ao seu formulário
                 }
-            @endforeach
-        }
-    });
-</script>
-
-       
+            });
+        </script>
+    
 
 </body>
 </html>

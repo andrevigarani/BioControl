@@ -34,6 +34,7 @@ body {
 .right-bottom {
     grid-area: right-bottom;
     background-color: #F3F4F0;
+    padding: 50px;
 }
 
 .menu-button {
@@ -162,3 +163,134 @@ body {
 .larguraSobra {
     width: 100vh;
 }
+
+
+
+
+
+
+.table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+}
+
+.table.table-menu {
+    background-color: #444D5D;
+    color: #FFFFFF;
+}
+
+.table th, .table td {
+    padding: 8px;
+    border-bottom: 1px solid #444D5D;
+    border-left: 1px solid #444D5D
+}
+
+.table th {
+    background-color: #444D5D;
+    color: #FFFFFF;
+}
+
+.table tr {
+    background-color: #FFFFFF;
+    color: #444D5D;
+
+}
+
+.table tr:hover {
+    background-color: #ADD90D;
+}
+
+.btn-edit, .btn-delete {
+    padding: 5px 10px;
+    background-color: #ADD90D;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-edit:hover {    
+    background-color: #666666; 
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro com transparência */
+    z-index: 1000; /* Posicione acima de outros elementos */
+}
+
+#modalCadastrar {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza vertical e horizontalmente */
+    background-color: #fff;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    z-index: 1001; /* Posicione acima do overlay */
+    border: none;
+    outline: none;
+}
+
+#btnFecharModal {
+    position: fixed;
+    top: 0; /* Alinha ao topo */
+    right: 0; /* Alinha à direita */
+    padding: 5px 10px;
+    background-color: #ADD90D;
+    color: #444D5D;
+    font-size: 12px;
+    border: none;
+    font-weight: bold;
+}
+
+#btnFecharModal:hover {
+    background-color: #444D5D;
+    color: #FFFFFF;
+}
+
+#modalCadastrarBairro h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    
+}
+
+/* Estilo dos campos de formulário */
+#modalCadastrarBairro label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 24px;
+    border-bottom: 1px;
+    border-bottom-color: #444D5D;
+}
+
+#modalCadastrarBairro input[type="text"] {
+    width: 100%;
+    padding: 5px 30px;
+    margin-bottom: 30px ;
+    border: none;
+}
+
+#btnGravarModal {
+    display: flex;
+    right: 0; /* Alinha à direita */
+    background-color: #444D5D;
+    margin-top: 30px;
+    padding: 5px 30px;
+    color: #ffffff;
+}
+
+#btnGravarModal:hover {
+    background-color: #ADD90D;
+    color: #444D5D;
+}
+

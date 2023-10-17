@@ -159,3 +159,39 @@ body {
     max-width: 50px; /* Largura máxima da imagem abaixo */
     mix-blend-mode: multiply;
 }
+
+
+
+
+
+
+.table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table tr:hover {
+    background-color: #ffc18e;
+}
+
+.btn-edit, .btn-delete {
+    padding: 5px 10px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-edit:hover {    
+    background-color: #666666; 
+}
+
+.btn-delete:hover {    
+    background-color: #666666; 
+}

@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->unsignedBigInteger('id_pessoa_fisica');
+
+            $table->foreign('id_pessoa_fisica')->references('id_pessoa_fisica')->on('pessoa_fisicas');
+            
         });
     }
 
