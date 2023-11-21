@@ -11,7 +11,6 @@ class PessoaFisicaSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-
     {
         $pessoaFisica1 = PessoaFisica::create([
             'nome' => 'Ricardo Augusto dos Santos Wegner',
@@ -103,12 +102,11 @@ class PessoaFisicaSeeder extends Seeder
             'id_bairro' => '1',
             'id_rua' => '1',
         ]);
-        
+
 
         // Associar as pessoas físicas e jurídicas à tabela pessoas usando o relacionamento polimórfico
         $pessoaFisica1->pessoa()->create(['nome' => 'João', 'email' => 'joao@example.com']);
         $pessoaFisica2->pessoa()->create(['nome' => 'Maria', 'email' => 'maria@example.com']);
-        
-    }
+
     }
 }
