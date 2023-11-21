@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout</title>
-    <link rel="stylesheet" href="{{ asset('css/privado/layoutprivado.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/private/layoutprivado.css') }}">
 </head>
 <body>
 

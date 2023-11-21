@@ -17,8 +17,8 @@ class RuaController extends Controller
         {
             $ruas = Rua::all();
             $bairros = Rua::with('bairro')->get();
-            //$nomeBairro = $rua->bairro->nome_bairro; 
-            return view('layouts.privado.ruaListar', compact('ruas'));
+            //$nomeBairro = $rua->bairro->nome_bairro;
+            return view('layouts.private.ruaListar', compact('ruas'));
         }
     }
 
@@ -59,7 +59,7 @@ class RuaController extends Controller
             return redirect()->back();
         } else {
             $bairros = Rua::with('bairro')->get();
-            //$nomeBairro = $rua->bairro->nome_bairro; 
+            //$nomeBairro = $rua->bairro->nome_bairro;
 
             $data = [
                 'nome_rua' => $request->input('nome_rua'),
@@ -71,7 +71,7 @@ class RuaController extends Controller
         }
 
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -91,9 +91,9 @@ class RuaController extends Controller
         // Verifique se o cardápio foi encontrado
         if (!$rua) {
             return redirect()->route('ruas.index')->with('error', 'Rua não encontrada.');
-        }   
+        }
 
-    return view('layouts.privado.ruaEditar', compact('rua'));
+    return view('layouts.private.ruaEditar', compact('rua'));
     }
 
     /**
@@ -123,13 +123,13 @@ class RuaController extends Controller
     {
         {
             $rua = Rua::where('id_rua', $id_rua)->first();
-    
+
             if ($rua) {
-    
+
                 $rua->delete();
                 return redirect()->route('ruas.index');
             }
-    
+
             return redirect()->route('ruas.index');
         }
     }

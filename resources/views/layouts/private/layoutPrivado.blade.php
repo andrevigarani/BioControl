@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout</title>
-    <link rel="stylesheet" href="{{ asset('css/privado/layoutprivado.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/private/layoutprivado.css') }}">
 </head>
 
 <body>
@@ -13,14 +13,14 @@
         @extends('\layouts\privado\layoutMenuPerfilPrivado')
     </div id='larguraSobra'>
 
-    <div class="right-top"> 
+    <div class="right-top">
         <div class="linha" class="superior">
             <div class="title">BAIRROS</div>
         </div>
-    
+
         <div class="linha">
-    
-        
+
+
             <div class="meio-esquerdo">
                 <select class="dropdown">
                     <option value="opcao1">ID</option>
@@ -34,9 +34,9 @@
                 <button class="button">Editar</button>
                 <button class="button" id="btnCadastrar">Adicionar</button>
             </div>
-    
+
         </div>
-        
+
         <div class="linha" class="inferior">
             <button class="button">Pesquisa Avançada</button>
             <button class="button">Bairros</button>
@@ -66,11 +66,11 @@
                         <td>
 
                             <a href="{{ route('bairros.edit', ['id_bairro' => $bairro->id_bairro]) }}" class="btn-edit">Editar</a>
-        
+
                                 <button class="btn-delete" type="button" onclick="event.preventDefault(); if(confirm('Deseja realmente excluir este bairro?')) { document.getElementById('delete-form-{{ $bairro->id_bairro }}').submit(); }">
                                     Excluir
                                 </button>
-                                
+
                                 <form id="delete-form-{{ $bairro->id_bairro }}" action="{{ route('bairro.destroy', ['id_bairro' => $bairro->id_bairro]) }}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
@@ -93,7 +93,7 @@
             <h2>Cadastrar Bairro</h2>
             <form method="POST" action="{{ route('bairro.store') }}" enctype="multipart/form-data">
                 @csrf
-    
+
                 <!-- Campos para o cadastro de bairro -->
                 <div class="input-field col s6">
 
@@ -113,25 +113,25 @@
                 <label for="nome_bairro"></label>
                 </div>
                 <!-- Outros campos -->
-    
+
                 <button id="btnGravarModal" type="submit" name="action">Cadastrar</button>
             </form>
-    
+
             <!-- Botão para fechar o modal -->
-            
+
         </div>
-    
+
         <!-- Script para abrir e fechar o modal -->
         <script>
             const btnCadastrar = document.getElementById('btnCadastrar');
             const modalCadastrar = document.getElementById('modalCadastrar');
             const btnFecharModal = document.getElementById('btnFecharModal');
-    
+
             btnCadastrar.addEventListener('click', () => {
                 modalCadastrar.style.display = 'block';
                 document.getElementById('overlay').style.display = 'block';
             });
-    
+
             btnFecharModal.addEventListener('click', () => {
                 modalCadastrar.style.display = 'none';
                 document.getElementById('overlay').style.display = 'none';
@@ -161,7 +161,7 @@
     });
 </script>
 
-       
+
 
 </body>
 </html>

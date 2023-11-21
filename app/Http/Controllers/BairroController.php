@@ -20,7 +20,7 @@ class BairroController extends Controller
             $estados = Estado::pluck('nome_estado', 'id_estado');
             $municipios = Municipio::all();
 
-            return view('layouts.privado.layoutPrivado', compact('bairros', 'estados', 'municipios'));
+            return view('layouts.private.layoutPrivado', compact('bairros', 'estados', 'municipios'));
         }
     }
 
@@ -57,7 +57,7 @@ class BairroController extends Controller
 
             $bairro = Bairro::create($data);
             return redirect()->route('bairros.index')->with('sucess', 'Bairro Cadastrado com Sucesso');
-        
+
         }
     }
 
@@ -79,9 +79,9 @@ class BairroController extends Controller
         // Verifique se o cardápio foi encontrado
         if (!$bairro) {
             return redirect()->route('bairros.index')->with('error', 'Bairro não encontrado.');
-        }   
+        }
 
-    return view('layouts.privado.bairroEditar', compact('bairro'));
+    return view('layouts.private.bairroEditar', compact('bairro'));
     }
 
     /**

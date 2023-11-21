@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout</title>
-    <link rel="stylesheet" href="{{ asset('css/privado/layoutprivado.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/private/layoutprivado.css') }}">
 </head>
 
 <body>
@@ -13,14 +13,14 @@
         @extends('\layouts\privado\layoutMenuPerfilPrivado')
     </div id='larguraSobra'>
 
-    <div class="right-top"> 
+    <div class="right-top">
         <div class="linha" class="superior">
             <div class="title">RUAS</div>
         </div>
-    
+
         <div class="linha">
-    
-        
+
+
             <div class="meio-esquerdo">
                 <select class="dropdown">
                     <option value="opcao1">ID</option>
@@ -34,9 +34,9 @@
                 <button class="button">Editar</button>
                 <button class="button" id="btnCadastrar">Adicionar</button>
             </div>
-    
+
         </div>
-        
+
         <div class="linha" class="inferior">
             <button class="button">Pesquisa Avançada</button>
             <button class="button">Bairros</button>
@@ -74,13 +74,13 @@
                             <button class="btn-delete" type="button" onclick="event.preventDefault(); if(confirm('Deseja realmente excluir esta rua?')) { document.getElementById('delete-form-{{ $rua->id_rua }}').submit(); }">
                                 Excluir
                             </button>
-                            
+
                             <form id="delete-form-{{ $rua->id_rua }}" action="{{ route('rua.destroy', ['id_rua' => $rua->id_rua]) }}" method="POST" style="display: none;">
                                 @csrf
                                 @method('DELETE')
                             </form>
                         </button>
-                            
+
 
                         </td>
                     </tr>
@@ -98,7 +98,7 @@
             <h2>Cadastrar Rua</h2>
             <form method="POST" action="{{ route('rua.store') }}" enctype="multipart/form-data">
                 @csrf
-    
+
                 <!-- Campos para o cadastro de rua -->
                 <div class="input-field col s6">
 
@@ -114,7 +114,7 @@
                     <label for="nome_bairro"></label>
                     </div>
                 <!-- Outros campos -->
-    
+
                 @if (session('error'))
                 <div class="alert alert-danger">
                     {{ session('error') }}
@@ -122,13 +122,13 @@
                 @endif
 
                 <button id="btnGravarModal" type="submit" name="action">Cadastrar</button>
-                
+
             </form>
-    
+
             <!-- Botão para fechar o modal -->
-            
+
         </div>
-    
+
         <!-- Script para abrir e fechar o modal -->
         <script>
             const btnCadastrar = document.getElementById('btnCadastrar');
@@ -142,7 +142,7 @@
                 modalCadastrar.style.display = 'block';
                 document.getElementById('overlay').style.display = 'block';
             });
-    
+
             btnFecharModal.addEventListener('click', () => {
                 modalCadastrar.style.display = 'none';
                 document.getElementById('overlay').style.display = 'none';
@@ -160,7 +160,7 @@
                 }
             });
         </script>
-    
+
 
 </body>
 </html>

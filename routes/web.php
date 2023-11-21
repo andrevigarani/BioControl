@@ -19,7 +19,8 @@ Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect()->route('home');
     }
-    return redirect()->route('login');
+    return redirect()->route('home');
+    //return redirect()->route('login');
 });
 
 Auth::routes(['reset' => false]);
@@ -28,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //
 //Route::get('/layoutPrivado', function () {
-//    return view('layouts/privado/layoutPrivado');
+//    return view('layouts/private/layoutPrivado');
 //});
 //
 ////Route::resource('bairros', BairroController::class);
