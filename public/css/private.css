@@ -4,10 +4,19 @@
     background-color: gray;
     height: 100px;
     color: white;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 7px;
 }
 
+.private-content{
+    margin-top: 10px;
+    border-radius: 7px;
+}
 
+.search-bar {
+    height: 37px;
+    border-radius: 7px;
+}
 /*body {*/
 /*    margin: 0;*/
 /*    padding: 0;*/
