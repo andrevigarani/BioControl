@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\PessoaFisica;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Bissolli\ValidadorCpfCnpj\CPF;
 
 class RegisterController extends Controller
 {
@@ -53,6 +55,15 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nascimento' => ['required', 'date'],
+            'cpf' => ['required',
+                function ($attribute, $value, $fail) {
+                    $document = new CPF($value);
+                    if (!$document->isValid()) {
+                        $fail($attribute . ' é inválido.');
+                    }
+                },
+            ]
         ]);
     }
 
@@ -64,10 +75,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $pessoa = PessoaFisica::create([
+            'nome' => $data['name'],
+            'cpf' => $data['cpf'],
+            'nascimento' => $data['nascimento'],
+        ]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'id_pessoa_fisica' => $pessoa->id
         ]);
     }
 }

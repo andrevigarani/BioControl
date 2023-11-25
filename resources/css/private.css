@@ -11,10 +11,17 @@ body {
     font-family: 'Lato', sans-serif; /* Define a fonte Lato */
 }
 
+.private-header {
+    width: 100%;
+    background-color: gray;
+    height: 100px;
+    color: white;
+}
+
 .left-top {
     grid-area: left-top;
     background-color: #444D5D;
-    
+
 }
 
 .right-top {
@@ -91,7 +98,7 @@ body {
     align-items: center;
     background-color: #727881;
     justify-content: flex-start;
-    
+
 }
 
 .meio-direito {
@@ -188,10 +195,10 @@ body {
     cursor: pointer;
 }
 
-.btn-edit:hover {    
-    background-color: #666666; 
+.btn-edit:hover {
+    background-color: #666666;
 }
 
-.btn-delete:hover {    
-    background-color: #666666; 
+.btn-delete:hover {
+    background-color: #666666;
 }

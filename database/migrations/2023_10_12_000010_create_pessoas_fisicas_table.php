@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('fone')->nullable();
             $table->string('numero_endereco')->nullable();
             $table->string('complemento')->nullable();
-            $table->unsignedBigInteger('id_rua');
+            $table->unsignedBigInteger('id_rua')->nullable();
 
             $table->timestamps();
 

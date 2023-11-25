@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'BioControl') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -21,82 +21,93 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'BioControl') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-{{--                                {{ Auth::user()->name }}--}}
-                            </a>
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @else
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        @if(!str_contains(Route::currentRouteName(),'login') && !str_contains(Route::currentRouteName(),'register'))
 
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item mx-5">
-                            <a class="nav-link text-light" href="#" role="button">
-                                INÍCIO
-                            </a>
-                        </li>
-                        <li class="nav-item mx-5">
-                            <a class="nav-link text-light" href="#" role="button">
-                                DADOS
-                            </a>
-                        </li>
-                        <li class="nav-item mx-5">
-                            <a class="nav-link text-light" href="#" role="button">
-                                ADOÇÃO SOLIDÁRIA
-                            </a>
-                        </li>
-                        <li class="nav-item mx-5">
-                            <a class="nav-link text-light" href="#" role="button">
-                                LOGÍSTICA REVERSA
-                            </a>
-                        </li>
-                        <li class="nav-item mx-5">
-                            <a class="nav-link text-light" href="#" role="button">
-                                CONTATOS
-                            </a>
-                        </li>
-                        <li class="nav-item mx-5">
-                            <a class="nav-link text-light" href="#" role="button">
-                                DENÚNCIAS
-                            </a>
-                        </li>
-                    </ul>
+            <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item mx-5">
+                                <a class="nav-link text-light" href="#" role="button">
+                                    DADOS
+                                </a>
+                            </li>
+                            <li class="nav-item mx-5">
+                                <a class="nav-link text-light" href="#" role="button">
+                                    ADOÇÃO SOLIDÁRIA
+                                </a>
+                            </li>
+                            <li class="nav-item mx-5">
+                                <a class="nav-link text-light" href="#" role="button">
+                                    LOGÍSTICA REVERSA
+                                </a>
+                            </li>
+                            <li class="nav-item mx-5">
+                                <a class="nav-link text-light" href="#" role="button">
+                                    CONTATOS
+                                </a>
+                            </li>
+                            <li class="nav-item mx-5">
+                                <a class="nav-link text-light" href="#" role="button">
+                                    DENÚNCIAS
+                                </a>
+                            </li>
+                            <li class="nav-item mx-5">
+                                <a class="nav-link text-light" href="{{ route('user.home') }}" role="button">
+                                    ÁREA LOGADA
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+
+        @endif
 
         <main class="py-4">
             @yield('content')

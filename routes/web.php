@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BairroController;
+use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\RuaController;
 
 /*
@@ -16,25 +16,33 @@ use App\Http\Controllers\RuaController;
 */
 
 Route::get('/', function () {
-    if (\Illuminate\Support\Facades\Auth::check()) {
-        return redirect()->route('home');
-    }
     return redirect()->route('home');
-    //return redirect()->route('login');
 });
 
 Auth::routes(['reset' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+Route::prefix('user',2)->middleware('auth')->group(function() {
+
+    Route::get('/home', [App\Http\Controllers\DoencaController::class, 'index'])->name('user.home');
+
+    Route::get('/contatos', [App\Http\Controllers\ContatoController::class, 'privateIndex'])->name('user.contatos.index');
+    Route::get('/contactos', [App\Http\Controllers\DoencaController::class, 'index'])->name('user.cntatos.index');
+    Route::get('/contacctos', [App\Http\Controllers\DoencaController::class, 'index'])->name('user.conttos.index');
+
+});
+
 //
 //Route::get('/layoutPrivado', function () {
 //    return view('layouts/private/layoutPrivado');
 //});
 //
-////Route::resource('bairros', BairroController::class);
 //
-//Route::get('/bairros', [BairroController::class, 'index'])->name('bairros.index');
+
+Route::get('/contatos', [ContatoController::class, 'index'])->name('contatos.index');
+
 //Route::get('/bairros/Editar/{id_bairro}', [BairroController::class, 'edit'])->name('bairros.edit');
 //Route::delete('/bairros/Excluir/{id_bairro}', [BairroController::class, 'destroy'])->name('bairro.destroy');
 //Route::put('/bairro/{id}', [BairroController::class, 'update'])->name('bairro.update');

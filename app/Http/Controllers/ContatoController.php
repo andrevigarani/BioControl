@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contato;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ContatoController extends Controller
@@ -12,7 +13,15 @@ class ContatoController extends Controller
      */
     public function index()
     {
-        //
+        return view('contato.index');
+    }
+
+    public function privateIndex()
+    {
+
+        $contatos = new Collection();
+
+        return view('private.contato.index', compact('contatos'));
     }
 
     /**

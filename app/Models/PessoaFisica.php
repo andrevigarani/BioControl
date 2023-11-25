@@ -9,9 +9,17 @@ class PessoaFisica extends Model
 {
     use HasFactory;
 
-    public function pessoa()
-    {
-        return $this->morphOne(Pessoa::class, 'entidade');
-    }
+    protected $table = 'pessoas_fisicas';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'nome',
+        'cpf',
+        'nascimento',
+    ];
 
 }
