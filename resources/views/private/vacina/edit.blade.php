@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <h2>Cadastrar Contato</h2>
+                <h2>Editar Vacina</h2>
 
                 @if(session('success'))
                     <div class="alert alert-success">
@@ -28,17 +28,22 @@
                     </div>
                 @endif
 
-                <form action="{{ route('user.contatos.store') }}" method="post">
+                <form action="{{ route('user.vacinas.update', $vacina->id) }}" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" class="form-control" required>
+                        <input type="text" name="nome" class="form-control" value="{{ $vacina->nome }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="fone">Telefone:</label>
-                        <input type="text" name="fone" class="form-control" required>
+                        <label for="descricao">Descrição:</label>
+                        <input type="text" name="descricao" class="form-control" value="{{ $vacina->descricao }}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <div class="form-group">
+                        <label for="periodo">Período:</label>
+                        <input type="text" name="periodo" class="form-control" value="{{ $vacina->periodo }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Gravar</button>
                 </form>
             </div>
         </div>

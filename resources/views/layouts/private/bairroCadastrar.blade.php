@@ -11,4 +11,4 @@
     <button class="btn waves-effect waves-light" style="margin-top: 150px;" type="submit" name="action">Cadastrar</button>
     </form>
     
-  </div>
+</div>

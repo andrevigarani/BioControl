@@ -12,17 +12,17 @@ class EspecieController extends Controller
      */
     public function index()
     {
-        //
+        $especies = Especie::all();
+        return view('private.especie.index', compact('especies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function privateIndex()
     {
-        //
-    }
 
+        $especies = new Collection();
+
+        return view('private.especie.index', compact('especies'));
+    }
     /**
      * Store a newly created resource in storage.
      */

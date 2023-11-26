@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Raca;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RacaController extends Controller
 {
@@ -12,7 +13,11 @@ class RacaController extends Controller
      */
     public function index()
     {
-        //
+        // Recupera os dados da tabela animais com informações sobre a espécie
+        $racas = Raca::with('especie')->get();
+        //dd($racas);  // Adicione esta linha para depurar
+    
+        return view('private.raca.index', compact('racas'));
     }
 
     /**

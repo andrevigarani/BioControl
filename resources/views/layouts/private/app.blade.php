@@ -41,13 +41,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('user.vacinas.index') }}">
                             VACINAS
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             DOENÇAS
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.especies.index') }}">
+                            ESPÉCIES
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.racas.index') }}">
+                            RAÇAS
                         </a>
                     </li>
                     <li class="nav-item">
