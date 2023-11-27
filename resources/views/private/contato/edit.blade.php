@@ -1,10 +1,14 @@
 @extends('layouts.private.app')
 
 @section('content')
+
+    <div class="private-header">
+        <h3>EDITAR CONTATO</h3>
+    </div>
+
     <div class="container">
         <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <h2>Editar Contato</h2>
+            <div class="col-md-8 offset-md-2 p-5">
 
                 @if(session('success'))
                     <div class="alert alert-success">
@@ -39,7 +43,7 @@
                         <label for="fone">Telefone:</label>
                         <input type="text" name="fone" class="form-control" value="{{ $contato->fone }}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Gravar</button>
+                    <button type="submit" class="btn btn-primary mt-4">Gravar</button>
                 </form>
             </div>
         </div>

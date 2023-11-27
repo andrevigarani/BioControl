@@ -1,13 +1,15 @@
 @extends('layouts.private.app')
 
 @section('content')
+
+
     <div class="private-header">
         <h3>CONTATOS</h3>
 
         <input type="text" class="form-text search-bar">
         <button type="button" class="btn btn-info">Pesquisar</button>
 
-        <div style="float: right">
+        <div class="float-end">
             <a href="{{ route('user.contatos.create') }}" type="button" class="btn btn-success">Novo Contato</a>
         </div>
     </div>
@@ -30,12 +32,12 @@
                 </thead>
                 <tbody>
                     @foreach($contatos as $contato)
-                        <tr style="vertical-align: middle" class="text-center">
+                        <tr class="align-middle text-center">
                             <td>{{ $contato->nome }}</td>
                             <td>{{ $contato->fone }}</td>
                             <td>
                                 <a href="{{ route('user.contatos.edit', $contato->id) }}" class="btn btn-warning">Editar</a>
-                                <form action="{{ route('user.contatos.destroy', $contato->id) }}" method="post" style="display:inline">
+                                <form action="{{ route('user.contatos.destroy', $contato->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>

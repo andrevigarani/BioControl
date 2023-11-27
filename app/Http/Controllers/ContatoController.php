@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contato;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ContatoController extends Controller
@@ -11,17 +10,18 @@ class ContatoController extends Controller
     /**
      * Display a listing of the resource.
      */
-   
+
     public function index()
     {
         $contatos = Contato::all();
-        return view('private.contato.index', compact('contatos'));
+
+        return view('public.contato.index', compact('contatos'));
     }
 
     public function privateIndex()
     {
 
-        $contatos = new Collection();
+        $contatos = Contato::all();
 
         return view('private.contato.index', compact('contatos'));
     }
@@ -31,9 +31,7 @@ class ContatoController extends Controller
      */
     public function create()
     {
-        $contatos = Contato::all();
-
-        return view('private.contato.create', ['contatos' => $contatos]);
+        return view('private.contato.create');
     }
 
     /**
@@ -45,7 +43,6 @@ class ContatoController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'fone' => 'required|string|regex:/^[0-9()+\-]+$/|max:20',
-            // Adicione outras regras de validação conforme necessário
         ]);
 
         // Tente criar um novo contato
@@ -56,11 +53,9 @@ class ContatoController extends Controller
                 // Adicione outros campos conforme necessário
             ]);
 
-            //Log::info('Contato cadastrado com sucesso!');
-
             return redirect()->route('user.contatos.index')->with('success', 'Contato cadastrado com sucesso!');
         } catch (\Exception $e) {
-            //Log::error('Erro ao cadastrar o contato: ' . $e->getMessage());
+
             return back()->with('error', 'Erro ao cadastrar o contato. Detalhes do erro: ' . $e->getMessage());
         }
     }
@@ -89,21 +84,18 @@ class ContatoController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'fone' => 'required|string|regex:/^[0-9()+\-]+$/|max:20',
-            // Adicione outras regras de validação conforme necessário
         ]);
-    
+
         try {
             $contato->update([
                 'nome' => $request->input('nome'),
                 'fone' => $request->input('fone'),
                 // Adicione outros campos conforme necessário
             ]);
-    
-           // Log::info('Contato atualizado com sucesso!');
-    
+
             return redirect()->route('user.contatos.index')->with('success', 'Contato atualizado com sucesso!');
         } catch (\Exception $e) {
-            // Log::error('Erro ao atualizar o contato: ' . $e->getMessage());
+
             return back()->with('error', 'Erro ao atualizar o contato. Detalhes do erro: ' . $e->getMessage());
         }
     }
