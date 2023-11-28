@@ -29,4 +29,9 @@ class Animal extends Model
         return $this->belongsTo(PessoaFisica::class, 'id_responsavel_animal');
     }
 
+    public function vacinas()
+    {
+        return $this->hasMany(AnimalVacina::class, 'id_animal', 'id');
+    }
+
 }

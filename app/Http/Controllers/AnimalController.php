@@ -86,8 +86,8 @@ class AnimalController extends Controller
      */
     public function edit(Animal $animal)
     {
-        $responsaveis = Responsavel::all(); // Obtém todos os responsáveis para o campo de seleção
-        return view('private.animal.edit', compact('animal', 'responsaveis'));
+        $pessoafisicas = PessoaFisica::all(); // Obtém todos os responsáveis para o campo de seleção
+        return view('private.animal.edit', compact('animal', 'pessoafisicas'));
     }
 
     /**
@@ -131,10 +131,15 @@ class AnimalController extends Controller
         }
     }
 
-    public function animaisVacinas(Animal $animal)
-    {
+    public function animaisVacinas($id)
+{
+    $animal = Animal::findOrFail($id);
 
-    }
+    // Agora, você pode acessar as vacinas diretamente através do relacionamento
+    $vacinas = $animal->vacinas;
+
+    return view('private.vacina.index', compact('animal', 'vacinas'));
+}
 
     public function animaisDoencas(Animal $animal)
     {
