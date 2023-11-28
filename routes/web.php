@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\VacinaController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -22,16 +23,20 @@ Route::get('/', function () {
 
 Auth::routes(['reset' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/contatos', [ContatoController::class, 'index'])->name('contatos.index');
+Route::get('/adocoes', [App\Http\Controllers\HomeController::class, 'index'])->name('adocoes.index');
+Route::get('/dados', [App\Http\Controllers\HomeController::class, 'index'])->name('dados.index');
+Route::get('/logisticaReversa', [App\Http\Controllers\HomeController::class, 'index'])->name('logisticaReversa.index');
+Route::get('/ocorrencias', [App\Http\Controllers\HomeController::class, 'index'])->name('ocorrencias.index');
 
 /*
  * Auth section
  */
 Route::prefix('user',2)->middleware('auth')->group(function() {
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'privateIndex'])->name('user.home');
+    Route::get('/home', [HomeController::class, 'privateIndex'])->name('user.home');
 
     Route::get('/contatos', [ContatoController::class, 'privateIndex'])->name('user.contatos.index');
     Route::get('/contatos/create', [ContatoController::class, 'create'])->name('user.contatos.create');

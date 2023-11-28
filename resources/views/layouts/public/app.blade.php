@@ -13,6 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('css/public.css') }}">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -68,36 +70,36 @@
 
             <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
                 <div class="container">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse">
 
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item mx-5">
-                                <a class="nav-link text-light" href="#" role="button">
+                        <ul class="navbar-nav w-100">
+                            <li class="nav-item w-100 h-100 text-center invert-nav-item @if(str_contains(Route::currentRouteName(),'dados')) bg-success @endif">
+                                <a class="nav-link text-light" href="{{ route('dados.index') }}">
                                     DADOS
                                 </a>
                             </li>
-                            <li class="nav-item mx-5">
-                                <a class="nav-link text-light" href="#" role="button">
+                            <li class="nav-item w-100 h-100 text-center invert-nav-item @if(str_contains(Route::currentRouteName(),'adocoes')) bg-success @endif">
+                                <a class="nav-link text-light" href="{{ route('adocoes.index') }}">
                                     ADOÇÃO SOLIDÁRIA
                                 </a>
                             </li>
-                            <li class="nav-item mx-5">
-                                <a class="nav-link text-light" href="#" role="button">
+                            <li class="nav-item w-100 h-100 text-center invert-nav-item @if(str_contains(Route::currentRouteName(),'logisticaReversa')) bg-success @endif">
+                                <a class="nav-link text-light" href="{{ route('logisticaReversa.index') }}">
                                     LOGÍSTICA REVERSA
                                 </a>
                             </li>
-                            <li class="nav-item mx-5">
-                                <a class="nav-link text-light" href="#" role="button">
+                            <li class="nav-item w-100 h-100 text-center invert-nav-item @if(str_contains(Route::currentRouteName(),'contatos')) bg-success @endif">
+                                <a class="nav-link text-light" href="{{ route('contatos.index') }}">
                                     CONTATOS
                                 </a>
                             </li>
-                            <li class="nav-item mx-5">
-                                <a class="nav-link text-light" href="#" role="button">
-                                    DENÚNCIAS
+                            <li class="nav-item w-100 h-100 text-center invert-nav-item @if(str_contains(Route::currentRouteName(),'ocorrencias')) bg-success @endif">
+                                <a class="nav-link text-light" href="{{ route('ocorrencias.index') }}">
+                                    OCORRÊNCIAS
                                 </a>
                             </li>
-                            <li class="nav-item mx-5">
-                                <a class="nav-link text-light" href="{{ route('user.home') }}" role="button">
+                            <li class="nav-item w-100 h-100 text-center invert-nav-item">
+                                <a class="nav-link text-light" href="{{ route('user.home') }}">
                                     ÁREA LOGADA
                                 </a>
                             </li>

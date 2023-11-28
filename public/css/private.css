@@ -1,21 +1,59 @@
+body {
+    background: rgba(255, 0, 0, 0.5) url("../images/bg-animals.png") repeat;
+    background-size: 13%;
+}
+
+h3 {
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+table {
+    margin-bottom: 0 !important;
+}
+
+.invert-nav-item:hover {
+    background-color: white;
+    transition: background-color 0.3s ease;
+    color: #212529 !important;
+}
+
+.invert-nav-item :hover {
+    color: #212529 !important;
+}
 
 .private-header {
     width: 100%;
-    background-color: gray;
-    height: 100px;
+    background-color: rgb(128, 128, 128);
     color: white;
     padding: 10px;
     border-radius: 7px;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
 }
 
-.private-content{
+.private-content {
     margin-top: 10px;
+    border : 3px solid rgb(128, 128, 128);
     border-radius: 7px;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
 }
 
 .search-bar {
+    border: #0a53be 3px solid;
     height: 37px;
     border-radius: 7px;
+}
+
+.btn-blue {
+    background-color: #0a53be !important;
+    color: white !important;
+}
+
+.btn-blue:hover {
+    background-color: #083f8d !important;
+    transition: background-color 0.3s ease;
 }
 
 /*body {*/

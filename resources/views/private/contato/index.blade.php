@@ -4,10 +4,10 @@
 
 
     <div class="private-header">
-        <h3>CONTATOS</h3>
+        <h3 class="text-center">CONTATOS</h3>
 
         <input type="text" class="form-text search-bar">
-        <button type="button" class="btn btn-info">Pesquisar</button>
+        <button type="button" class="btn btn-blue">Pesquisar</button>
 
         <div class="float-end">
             <a href="{{ route('user.contatos.create') }}" type="button" class="btn btn-success">Novo Contato</a>

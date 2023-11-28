@@ -16,4 +16,9 @@ class HomeController extends Controller
     {
         return view('public.home');
     }
+
+    public function privateIndex()
+    {
+        return view('private.home');
+    }
 }

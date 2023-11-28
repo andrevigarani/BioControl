@@ -1,0 +1,14 @@
+body {
+    background: url("../images/bg-animals-white.png") repeat;
+    background-size: 13%;
+}
+
+.invert-nav-item:hover {
+    background-color: white;
+    transition: background-color 0.3s ease;
+    color: #212529 !important;
+}
+
+.invert-nav-item :hover {
+    color: #212529 !important;
+}

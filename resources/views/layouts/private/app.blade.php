@@ -20,12 +20,12 @@
 
 </head>
 <body>
-    <div id="app" style="display: flex; flex-wrap: wrap">
-        <nav class="position-fixed col-md-2 d-none d-md-block bg-dark sidebar navbar-light shadow-sm" style="height: 100vh; overflow-y: auto">
+    <div id="app" class="d-flex flex-wrap">
+        <nav class="position-fixed col-md-2 d-none d-md-block bg-dark sidebar navbar-light shadow-sm overflow-y-auto" style="height: 100vh;">
             <div class="sidebar-sticky container">
 
                 <ul class="nav flex-column pt-3">
-                    <li class="nav-item">
+                    <li class="nav-item invert-nav-item">
                         <a class="nav-link text-light" href="{{ url('/') }}">
                             {{ config('app.name', 'BioControl') }}
                         </a>
@@ -35,48 +35,48 @@
                 <hr class="border-white">
 
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            ANIMAIS
+                    <li class="nav-item invert-nav-item">
+                        <a class="nav-link text-light" href="#">
+                            Animais
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.vacinas.index') }}">
-                            VACINAS
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'vacinas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.vacinas.index') }}">
+                            Vacinas
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            DOENÇAS
+                    <li class="nav-item invert-nav-item">
+                        <a class="nav-link text-light" href="#">
+                            Doenças
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.especies.index') }}">
-                            ESPÉCIES
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'especies')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.especies.index') }}">
+                            Espécies
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.racas.index') }}">
-                            RAÇAS
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'racas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.racas.index') }}">
+                            Raças
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.contatos.index') }}">
-                            CONTATOS
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'contatos')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.contatos.index') }}">
+                            Contatos
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            USUÁRIOS
+                    <li class="nav-item invert-nav-item">
+                        <a class="nav-link text-light" href="#">
+                            Usuários
                         </a>
                     </li>
                 </ul>
 
                 <hr class="border-white">
 
-                <ul class="nav flex-column mt-auto position-absolute bottom-0 mb-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"
+                <ul class="nav flex-column position-absolute bottom-0 mb-4">
+                    <li class="nav-item invert-nav-item">
+                        <a class="nav-link text-light" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
@@ -90,8 +90,7 @@
             </div>
         </nav>
 
-        <div class="col-md-2"></div>
-        <main class="col-md-10 p-3">
+        <main class="col-md-10 p-3 offset-2">
             @yield('content')
         </main>
     </div>

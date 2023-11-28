@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="private-header">
-        <h3>EDITAR CONTATO</h3>
+        <h3 class="text-center">EDITAR CONTATO</h3>
     </div>
 
     <div class="container">
