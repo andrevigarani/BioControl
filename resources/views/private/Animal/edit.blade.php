@@ -33,7 +33,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('user.animais.update', $animal->id) }}" method="post">
+                    <form action="{{ route('user.animais.update', 1) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -55,9 +55,9 @@
                         <div class="form-group">
                             <label for="id_responsavel_animal">Responsável:</label>
                             <select name="id_responsavel_animal" class="form-control" required>
-                                @foreach($responsaveis as $responsavel)
-                                    <option value="{{ $responsavel->id }}" {{ $animal->id_responsavel_animal == $responsavel->id ? 'selected' : '' }}>
-                                        {{ $responsavel->nome }}
+                                @foreach($pessoafisicas as $pessoafisica)
+                                    <option value="{{ $pessoafisica->id }}" {{ $animal->id_responsavel_animal == $pessoafisica->id ? 'selected' : '' }}>
+                                        {{ $pessoafisica->nome }}
                                     </option>
                                 @endforeach
                             </select>

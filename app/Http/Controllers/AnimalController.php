@@ -19,8 +19,6 @@ class AnimalController extends Controller
 
     public function privateIndex()
     {
-        $animais = Animal::all();
-
         $pesquisa = request('pesquisa');
 
         $animais = Animal::when($pesquisa, function ($query) use ($pesquisa) {
@@ -50,7 +48,6 @@ class AnimalController extends Controller
             'nascimento' => 'required|date',
             'falecimento' => 'nullable|date',
             'castracao' => 'nullable|date',
-            'id_raca' => 'nullable|exists:racas,id',
             'id_responsavel_animal' => 'required|exists:pessoas_fisicas,id',
         ]);
 
@@ -132,14 +129,14 @@ class AnimalController extends Controller
     }
 
     public function animaisVacinas($id)
-{
-    $animal = Animal::findOrFail($id);
+    {
+        $animal = Animal::findOrFail($id);
 
-    // Agora, você pode acessar as vacinas diretamente através do relacionamento
-    $vacinas = $animal->vacinas;
+        // Agora, você pode acessar as vacinas diretamente através do relacionamento
+        $vacinas = $animal->vacinas;
 
-    return view('private.vacina.index', compact('animal', 'vacinas'));
-}
+        return view('private.vacina.index', compact('animal', 'vacinas'));
+    }
 
     public function animaisDoencas(Animal $animal)
     {
