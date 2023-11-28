@@ -10,9 +10,11 @@ class DoencaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function privateIndex()
     {
-        return view('private.doenca.index');
+        $doencas = Doenca::all();
+
+        return view('private.doenca.index', compact('doencas'));
     }
 
     /**
@@ -20,7 +22,7 @@ class DoencaController extends Controller
      */
     public function create()
     {
-        //
+        return view('private.doenca.create');
     }
 
     /**
@@ -28,7 +30,21 @@ class DoencaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string',
+        ]);
+
+        try {
+            Doenca::create([
+                'nome' => $request->input('nome'),
+                'descricao' => $request->input('descricao'),
+            ]);
+
+            return redirect()->route('user.doencas.index')->with('success', 'Doença cadastrada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao cadastrar a doença. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -44,7 +60,7 @@ class DoencaController extends Controller
      */
     public function edit(Doenca $doenca)
     {
-        //
+        return view('private.doenca.edit', compact('doenca'));
     }
 
     /**
@@ -52,7 +68,21 @@ class DoencaController extends Controller
      */
     public function update(Request $request, Doenca $doenca)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string',
+        ]);
+
+        try {
+            $doenca->update([
+                'nome' => $request->input('nome'),
+                'descricao' => $request->input('descricao'),
+            ]);
+
+            return redirect()->route('user.doencas.index')->with('success', 'Doença atualizada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao atualizar a doença. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -60,6 +90,11 @@ class DoencaController extends Controller
      */
     public function destroy(Doenca $doenca)
     {
-        //
+        try {
+            $doenca->delete();
+            return redirect()->route('user.doencas.index')->with('success', 'Doença excluída com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao excluir a doença. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 }

@@ -9,15 +9,13 @@ class Rua extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_rua';
     protected $fillable = [
-        'nome_rua',
-        '_token',
+        'nome',
         'id_bairro'
     ];
 
     public function bairro()
     {
         return $this->belongsTo(Bairro::class, 'id_bairro');
-    }   
+    }
 }

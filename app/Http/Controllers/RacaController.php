@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Raca;
+use App\Models\Especie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RacaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function privateIndex()
     {
         // Recupera os dados da tabela animais com informações sobre a espécie
         $racas = Raca::with('especie')->get();
-        //dd($racas);  // Adicione esta linha para depurar
-    
+
         return view('private.raca.index', compact('racas'));
     }
 
@@ -25,7 +24,9 @@ class RacaController extends Controller
      */
     public function create()
     {
-        //
+        $especies = Especie::all();
+
+        return view('private.raca.create', compact('especies'));
     }
 
     /**
@@ -33,7 +34,22 @@ class RacaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'especie' => 'required|int',
+        ]);
+
+        try {
+            Raca::create([
+                'nome' => $request->input('nome'),
+                'id_especie' => $request->input('especie'),
+            ]);
+
+            return redirect()->route('user.racas.index')->with('success', 'Raça cadastrada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao cadastrar a raça. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -49,7 +65,8 @@ class RacaController extends Controller
      */
     public function edit(Raca $raca)
     {
-        //
+        $especies = Especie::all();
+        return view('private.raca.edit', compact('raca', 'especies'));
     }
 
     /**
@@ -57,7 +74,21 @@ class RacaController extends Controller
      */
     public function update(Request $request, Raca $raca)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'especie' => 'required|int',
+        ]);
+
+        try {
+            $raca->update([
+                'nome' => $request->input('nome'),
+                'id_especie' => $request->input('especie'),
+            ]);
+
+            return redirect()->route('user.racas.index')->with('success', 'Raça atualizada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao atualizar a raça. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -65,6 +96,11 @@ class RacaController extends Controller
      */
     public function destroy(Raca $raca)
     {
-        //
+        try {
+            $raca->delete();
+            return redirect()->route('user.racas.index')->with('success', 'Raça excluída com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao excluir a raça. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 }

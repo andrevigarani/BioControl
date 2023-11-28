@@ -7,28 +7,42 @@ use Illuminate\Http\Request;
 
 class EspecieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $especies = Especie::all();
-        return view('private.especie.index', compact('especies'));
-    }
 
     public function privateIndex()
     {
 
-        $especies = new Collection();
+        $especies = Especie::all();
 
         return view('private.especie.index', compact('especies'));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function create(Request $request)
+    {
+        return view('private.especie.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nome' => 'required|string|max:255',
+        ]);
+
+        try {
+            Especie::create([
+                'nome' => $request->input('nome'),
+            ]);
+
+            return redirect()->route('user.especies.index')->with('success', 'Espécie cadastrada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao cadastrar a espécie. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -44,7 +58,7 @@ class EspecieController extends Controller
      */
     public function edit(Especie $especie)
     {
-        //
+        return view('private.especie.edit', compact('especie'));
     }
 
     /**
@@ -52,7 +66,19 @@ class EspecieController extends Controller
      */
     public function update(Request $request, Especie $especie)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+        ]);
+
+        try {
+            $especie->update([
+                'nome' => $request->input('nome'),
+            ]);
+
+            return redirect()->route('user.especies.index')->with('success', 'Espécie atualizada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao atualizar a espécie. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -60,6 +86,11 @@ class EspecieController extends Controller
      */
     public function destroy(Especie $especie)
     {
-        //
+        try {
+            $especie->delete();
+            return redirect()->route('user.especies.index')->with('success', 'Espécie excluída com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao excluir a espécie. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 }

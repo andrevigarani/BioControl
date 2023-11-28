@@ -10,8 +10,6 @@ class Especie extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'nome',
-        // Adicione outros campos conforme necessário
     ];
 }

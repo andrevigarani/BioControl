@@ -9,10 +9,8 @@ class Bairro extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_bairro';
     protected $fillable = [
-        'nome_bairro',
+        'nome',
         'id_municipio',
-        '_token',
     ];
 }

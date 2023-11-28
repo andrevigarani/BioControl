@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('especies', function (Blueprint $table) {
             $table->id();
-            $table->String('nome')->notNullable();;
+            $table->String('nome')->notNullable();
+
+            $table->timestamps();
         });
     }
 

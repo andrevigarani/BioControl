@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Doenca extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nome',
+        'descricao',
+    ];
 }

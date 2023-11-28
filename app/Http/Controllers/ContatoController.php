@@ -39,18 +39,15 @@ class ContatoController extends Controller
      */
     public function store(Request $request)
     {
-        // Valide os dados recebidos do formulário
         $request->validate([
             'nome' => 'required|string|max:255',
             'fone' => 'required|string|regex:/^[0-9()+\-]+$/|max:20',
         ]);
 
-        // Tente criar um novo contato
         try {
             Contato::create([
                 'nome' => $request->input('nome'),
                 'fone' => $request->input('fone'),
-                // Adicione outros campos conforme necessário
             ]);
 
             return redirect()->route('user.contatos.index')->with('success', 'Contato cadastrado com sucesso!');
@@ -90,7 +87,6 @@ class ContatoController extends Controller
             $contato->update([
                 'nome' => $request->input('nome'),
                 'fone' => $request->input('fone'),
-                // Adicione outros campos conforme necessário
             ]);
 
             return redirect()->route('user.contatos.index')->with('success', 'Contato atualizado com sucesso!');

@@ -20,7 +20,7 @@
 
 </head>
 <body>
-    <div id="app" class="d-flex flex-wrap">
+    <div id="app">
         <nav class="position-fixed col-md-2 d-none d-md-block bg-dark sidebar navbar-light shadow-sm overflow-y-auto" style="height: 100vh;">
             <div class="sidebar-sticky container">
 
@@ -45,8 +45,8 @@
                             Vacinas
                         </a>
                     </li>
-                    <li class="nav-item invert-nav-item">
-                        <a class="nav-link text-light" href="#">
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'doencas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.doencas.index') }}">
                             Doenças
                         </a>
                     </li>

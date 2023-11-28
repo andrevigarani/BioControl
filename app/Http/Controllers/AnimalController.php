@@ -15,6 +15,10 @@ class AnimalController extends Controller
         //
     }
 
+    public function adocaoIndex()
+    {
+        return view('public.dev');
+    }
     /**
      * Show the form for creating a new resource.
      */

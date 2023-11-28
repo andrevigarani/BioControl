@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="private-header">
-        <h3 class="text-center">NOVO CONTATO</h3>
+        <h3 class="text-center">EDITAR ESPÉCIE</h3>
     </div>
 
     <div class="private-content bg-light" style="--bs-bg-opacity: 0.85">
@@ -33,17 +33,14 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('user.contatos.store') }}" method="post">
+                    <form action="{{ route('user.especies.update', $especie->id) }}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label for="nome">Nome:</label>
-                            <input type="text" name="nome" class="form-control" required value="{{ old('nome') }}">
+                            <input type="text" name="nome" class="form-control" value="{{ $especie->nome }}" required>
                         </div>
-                        <div class="form-group">
-                            <label for="fone">Telefone:</label>
-                            <input type="text" name="fone" class="form-control" required value="{{ old('fone') }}">
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-4">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary mt-4">Gravar</button>
                     </form>
                 </div>
             </div>

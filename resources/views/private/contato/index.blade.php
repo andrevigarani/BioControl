@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div class="private-header">
         <h3 class="text-center">CONTATOS</h3>
 

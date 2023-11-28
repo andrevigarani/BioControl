@@ -70,7 +70,8 @@
 
             <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
                 <div class="container">
-                    <div class="collapse navbar-collapse">
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                         <ul class="navbar-nav w-100">
                             <li class="nav-item w-100 h-100 text-center invert-nav-item @if(str_contains(Route::currentRouteName(),'dados')) bg-success @endif">

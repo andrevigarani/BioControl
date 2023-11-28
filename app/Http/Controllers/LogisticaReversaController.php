@@ -12,7 +12,7 @@ class LogisticaReversaController extends Controller
      */
     public function index()
     {
-        //
+        return view('public.dev');
     }
 
     /**

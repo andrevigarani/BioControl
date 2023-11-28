@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('doencas', function (Blueprint $table) {
             $table->id();
-            $table->String('nome')->notNullable();
+            $table->String('nome');
             $table->text('descricao');
             $table->timestamps();
         });

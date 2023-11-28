@@ -1,13 +1,14 @@
 @extends('layouts.private.app')
 
 @section('content')
+
     <div class="private-header">
-        <h3>VACINAS</h3>
+        <h3 class="text-center">VACINAS</h3>
 
         <input type="text" class="form-text search-bar">
-        <button type="button" class="btn btn-info">Pesquisar</button>
+        <button type="button" class="btn btn-blue">Pesquisar</button>
 
-        <div style="float: right">
+        <div class="float-end">
             <a href="{{ route('user.vacinas.create') }}" type="button" class="btn btn-success">Nova Vacina</a>
         </div>
     </div>
@@ -31,13 +32,13 @@
                 </thead>
                 <tbody>
                     @foreach($vacinas as $vacina)
-                        <tr style="vertical-align: middle" class="text-center">
+                        <tr class="align-middle text-center">
                             <td>{{ $vacina->nome }}</td>
-                            <td>{{ $vacina->descricao }}</td>
+                            <td>{{ substr($vacina->descricao,0,70) }}</td>
                             <td>{{ $vacina->periodo }}</td>
                             <td>
                                 <a href="{{ route('user.vacinas.edit', $vacina->id) }}" class="btn btn-warning">Editar</a>
-                                <form action="{{ route('user.vacinas.destroy', $vacina->id) }}" method="post" style="display:inline">
+                                <form action="{{ route('user.vacinas.destroy', $vacina->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>

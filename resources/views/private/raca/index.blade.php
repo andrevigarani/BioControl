@@ -1,12 +1,16 @@
 @extends('layouts.private.app')
 
 @section('content')
+
     <div class="private-header">
-        <h3>RAÇAS</h3>
+        <h3 class="text-center">RAÇAS</h3>
 
         <input type="text" class="form-text search-bar">
-        <button type="button" class="btn btn-info">Pesquisar</button>
+        <button type="button" class="btn btn-blue">Pesquisar</button>
 
+        <div class="float-end">
+            <a href="{{ route('user.racas.create') }}" type="button" class="btn btn-success">Nova Raça</a>
+        </div>
     </div>
 
     <div class="private-content">
@@ -23,19 +27,22 @@
                 <thead class="text-center">
                     <th scope="col">ID</th>
                     <th scope="col">NOME</th>
-                    <th scope="col">ESPECIE</th>
+                    <th scope="col">ESPÉCIE</th>
+                    <th scope="col">AÇÕES</th>
                 </thead>
                 <tbody>
                     @foreach($racas as $raca)
-                        <tr style="vertical-align: middle" class="text-center">
+                        <tr class="align-middle text-center">
                             <td>{{ $raca->id }}</td>
                             <td>{{ $raca->nome }}</td>
+                            <td>{{ $raca->especie->nome }}</td>
                             <td>
-                                @if ($raca->especie) 
-                                    {{ $raca->especie->nome }}
-                                @else
-                                    Sem espécie associada
-                                @endif
+                                <a href="{{ route('user.racas.edit', $raca->id) }}" class="btn btn-warning">Editar</a>
+                                <form action="{{ route('user.racas.destroy', $raca->id) }}" method="post" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
