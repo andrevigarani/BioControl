@@ -65,11 +65,11 @@
                             Contatos
                         </a>
                     </li>
-                    <li class="nav-item invert-nav-item">
-                        <a class="nav-link text-light" href="#">
-                            Usuários
-                        </a>
-                    </li>
+{{--                    <li class="nav-item invert-nav-item">--}}
+{{--                        <a class="nav-link text-light" href="#">--}}
+{{--                            Usuários--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
 
                 <hr class="border-white">

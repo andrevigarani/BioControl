@@ -5,8 +5,10 @@
     <div class="private-header">
         <h3 class="text-center">VACINAS</h3>
 
-        <input type="text" class="form-text search-bar">
-        <button type="button" class="btn btn-blue">Pesquisar</button>
+        <form action="{{ route('user.vacinas.index') }}" method="GET" class="d-inline">
+            <input type="text" class="form-text search-bar" placeholder="Digite sua pesquisa..." name="pesquisa" value="{{ request('pesquisa') }}">
+            <button class="btn btn-blue" type="submit">Pesquisar</button>
+        </form>
 
         <div class="float-end">
             <a href="{{ route('user.vacinas.create') }}" type="button" class="btn btn-success">Nova Vacina</a>

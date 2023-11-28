@@ -9,7 +9,11 @@ class VacinaController extends Controller
 {
     public function privateIndex()
     {
-        $vacinas = Vacina::all();
+        $pesquisa = request('pesquisa');
+
+        $vacinas = Vacina::when($pesquisa, function ($query) use ($pesquisa) {
+            return $query->where('nome', 'like', '%'.$pesquisa.'%');
+        })->get();
 
         return view('private.vacina.index', compact('vacinas'));
     }

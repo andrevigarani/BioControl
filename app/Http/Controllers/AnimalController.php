@@ -12,22 +12,21 @@ class AnimalController extends Controller
      * Display a listing of the resource.
      */
 
-    /*public function adocaoIndex()
+    public function adocaoIndex()
     {
         return view('public.dev');
-    }*/
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function index()
-    {
-        $animais = Animal::all();
-        return view('public.animal.index', compact('animais'));
     }
 
     public function privateIndex()
     {
         $animais = Animal::all();
+
+        $pesquisa = request('pesquisa');
+
+        $animais = Animal::when($pesquisa, function ($query) use ($pesquisa) {
+            return $query->where('nome', 'like', '%'.$pesquisa.'%');
+        })->with('pessoa_fisica')->get();
+
         return view('private.animal.index', compact('animais'));
     }
 
@@ -51,6 +50,7 @@ class AnimalController extends Controller
             'nascimento' => 'required|date',
             'falecimento' => 'nullable|date',
             'castracao' => 'nullable|date',
+            'id_raca' => 'nullable|exists:racas,id',
             'id_responsavel_animal' => 'required|exists:pessoas_fisicas,id',
         ]);
 
@@ -133,11 +133,11 @@ class AnimalController extends Controller
 
     public function animaisVacinas(Animal $animal)
     {
-        
+
     }
 
     public function animaisDoencas(Animal $animal)
     {
-        
+
     }
 }

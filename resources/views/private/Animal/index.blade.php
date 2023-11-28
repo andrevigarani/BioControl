@@ -5,8 +5,10 @@
     <div class="private-header">
         <h3 class="text-center">ANIMAIS</h3>
 
-        <input type="text" class="form-text search-bar">
-        <button type="button" class="btn btn-blue">Pesquisar</button>
+        <form action="{{ route('user.animais.index') }}" method="GET" class="d-inline">
+            <input type="text" class="form-text search-bar" placeholder="Digite sua pesquisa..." name="pesquisa" value="{{ request('pesquisa') }}">
+            <button class="btn btn-blue" type="submit">Pesquisar</button>
+        </form>
 
         <div class="float-end">
             <a href="{{ route('user.animais.create') }}" type="button" class="btn btn-success">Novo Animal</a>
@@ -41,7 +43,7 @@
                             <td>{{ $animal->nascimento }}</td>
                             <td>{{ $animal->falecimento ?? 'Não informado' }}</td>
                             <td>{{ $animal->castracao ?? 'Não informado' }}</td>
-                            <td>{{ $animal->user->nome }}</td>
+                            <td>{{ $animal->pessoa_fisica->nome }}</td>
                             <td>
                                 <a href="{{ route('user.animais.edit', $animal->id) }}" class="btn btn-warning">Editar</a>
                                 <form action="{{ route('user.animais.destroy', $animal->id) }}" method="post" class="d-inline">
@@ -49,8 +51,8 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
                                 </form>
-                                <a href="{{ route('user.animaisvacinas.edit', $animal->id) }}" class="btn btn-warning">Vacinas</a>
-                                <a href="{{ route('user.animaisdoencas.edit', $animal->id) }}" class="btn btn-warning">Doenças</a>
+                                <a href="{{ route('user.animais.vacinas.index', $animal->id) }}" class="btn btn-blue">Vacinas</a>
+                                <a href="{{ route('user.animais.doencas.index', $animal->id) }}" class="btn btn-blue">Doenças</a>
                             </td>
                         </tr>
                     @endforeach

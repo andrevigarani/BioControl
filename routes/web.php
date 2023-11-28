@@ -86,7 +86,7 @@ Route::prefix('user',2)->middleware('auth')->group(function() {
     Route::delete('/animais/{id}', [AnimalController::class, 'destroy'])->name('user.animais.destroy');
     Route::get('/animais/{id}/edit', [AnimalController::class, 'edit'])->name('user.animais.edit');
     Route::put('/animais/update/{id}', [AnimalController::class, 'update'])->name('user.animais.update');
-    Route::put('/animais/vacina/{id}', [AnimalController::class, 'animaisVacinas'])->name('user.animaisvacinas.update');
-    Route::get('/animais/doenca', [AnimalController::class, 'animaisDoencas'])->name('user.animaisdoencas.index');
+    Route::put('/animais/{id}/vacinas', [AnimalController::class, 'animaisVacinas'])->name('user.animais.vacinas.index');
+    Route::get('/animais/{id}/doencas', [AnimalController::class, 'animaisDoencas'])->name('user.animais.doencas.index');
 
 });

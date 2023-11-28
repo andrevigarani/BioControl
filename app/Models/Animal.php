@@ -11,8 +11,6 @@ class Animal extends Model
 
     protected $table = 'animais';
 
-    use HasFactory;
-
     protected $fillable = [
         'nome',
         'nascimento',
@@ -24,4 +22,11 @@ class Animal extends Model
         'id_clinica_veterinaria',
         'id_responsavel_animal',
     ];
+
+    // Relacionamento com a tabela de espécies
+    public function pessoa_fisica()
+    {
+        return $this->belongsTo(PessoaFisica::class, 'id_responsavel_animal');
+    }
+
 }

@@ -21,7 +21,11 @@ class ContatoController extends Controller
     public function privateIndex()
     {
 
-        $contatos = Contato::all();
+        $pesquisa = request('pesquisa');
+
+        $contatos = Contato::when($pesquisa, function ($query) use ($pesquisa) {
+            return $query->where('nome', 'like', '%'.$pesquisa.'%');
+        })->get();
 
         return view('private.contato.index', compact('contatos'));
     }

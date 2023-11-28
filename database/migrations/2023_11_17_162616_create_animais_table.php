@@ -19,9 +19,9 @@ return new class extends Migration
             $table->date('castracao')->nullable();
 
             $table->unsignedBigInteger('id_raca');
-            $table->unsignedBigInteger('id_chip')->Nullable();
-            $table->unsignedBigInteger('id_abrigo')->Nullable();
-            $table->unsignedBigInteger('id_clinica_veterinaria')->Nullable();
+            $table->unsignedBigInteger('id_chip')->nullable();
+            $table->unsignedBigInteger('id_abrigo')->nullable();
+            $table->unsignedBigInteger('id_clinica_veterinaria')->nullable();
             $table->unsignedBigInteger('id_responsavel_animal');
             $table->timestamps();
 

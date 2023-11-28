@@ -12,7 +12,11 @@ class DoencaController extends Controller
      */
     public function privateIndex()
     {
-        $doencas = Doenca::all();
+        $pesquisa = request('pesquisa');
+
+        $doencas = Doenca::when($pesquisa, function ($query) use ($pesquisa) {
+            return $query->where('nome', 'like', '%'.$pesquisa.'%');
+        })->get();
 
         return view('private.doenca.index', compact('doencas'));
     }

@@ -10,8 +10,11 @@ class EspecieController extends Controller
 
     public function privateIndex()
     {
+        $pesquisa = request('pesquisa');
 
-        $especies = Especie::all();
+        $especies = Especie::when($pesquisa, function ($query) use ($pesquisa) {
+            return $query->where('nome', 'like', '%'.$pesquisa.'%');
+        })->get();
 
         return view('private.especie.index', compact('especies'));
     }

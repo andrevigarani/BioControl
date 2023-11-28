@@ -13,8 +13,11 @@ class RacaController extends Controller
      */
     public function privateIndex()
     {
-        // Recupera os dados da tabela animais com informações sobre a espécie
-        $racas = Raca::with('especie')->get();
+        $pesquisa = request('pesquisa');
+
+        $racas = Raca::when($pesquisa, function ($query) use ($pesquisa) {
+            return $query->where('nome', 'like', '%'.$pesquisa.'%');
+        })->with('especie')->get();
 
         return view('private.raca.index', compact('racas'));
     }
