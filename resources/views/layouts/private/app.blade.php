@@ -36,7 +36,7 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item invert-nav-item">
-                        <a class="nav-link text-light" href="#">
+                        <a class="nav-link text-light" href="{{ route('user.animais.index') }}">
                             Animais
                         </a>
                     </li>

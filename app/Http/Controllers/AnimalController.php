@@ -4,27 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Animal;
 use Illuminate\Http\Request;
+use App\Models\PessoaFisica;
 
 class AnimalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
 
-    public function adocaoIndex()
+    /*public function adocaoIndex()
     {
         return view('public.dev');
+    }*/
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function index()
+    {
+        $animais = Animal::all();
+        return view('public.animal.index', compact('animais'));
     }
+
+    public function privateIndex()
+    {
+        $animais = Animal::all();
+        return view('private.animal.index', compact('animais'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $pessoafisicas = PessoaFisica::all();
+
+        return view('private.animal.create', compact('pessoafisicas'));
     }
 
     /**
@@ -32,7 +46,31 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'nascimento' => 'required|date',
+            'falecimento' => 'nullable|date',
+            'castracao' => 'nullable|date',
+            'id_responsavel_animal' => 'required|exists:pessoas_fisicas,id',
+        ]);
+
+        try {
+            Animal::create([
+                'nome' => $request->input('nome'),
+                'nascimento' => $request->input('nascimento'),
+                'falecimento' => $request->input('falecimento'),
+                'castracao' => $request->input('castracao'),
+                'id_responsavel_animal' => $request->input('id_responsavel_animal'),
+                'id_raca' => 1,
+                'id_chip' => null,
+                'id_clinica_veterinaria' => null,
+                'id_abrigo' => null,
+            ]);
+
+            return redirect()->route('user.animais.index')->with('success', 'Animal cadastrado com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao cadastrar o animal. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -48,7 +86,8 @@ class AnimalController extends Controller
      */
     public function edit(Animal $animal)
     {
-        //
+        $responsaveis = Responsavel::all(); // Obtém todos os responsáveis para o campo de seleção
+        return view('private.animal.edit', compact('animal', 'responsaveis'));
     }
 
     /**
@@ -56,7 +95,27 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'nascimento' => 'required|date',
+            'falecimento' => 'nullable|date',
+            'castracao' => 'nullable|date',
+            'id_responsavel_animal' => 'required|exists:responsaveis,id',
+        ]);
+
+        try {
+            $animal->update([
+                'nome' => $request->input('nome'),
+                'nascimento' => $request->input('nascimento'),
+                'falecimento' => $request->input('falecimento'),
+                'castracao' => $request->input('castracao'),
+                'id_responsavel_animal' => $request->input('id_responsavel_animal'),
+            ]);
+
+            return redirect()->route('user.animais.index')->with('success', 'Animal atualizado com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao atualizar o animal. Detalhes do erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -64,6 +123,21 @@ class AnimalController extends Controller
      */
     public function destroy(Animal $animal)
     {
-        //
+        try {
+            $animal->delete();
+            return redirect()->route('user.animais.index')->with('success', 'Animal excluído com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao excluir o animal. Detalhes do erro: ' . $e->getMessage());
+        }
+    }
+
+    public function animaisVacinas(Animal $animal)
+    {
+        
+    }
+
+    public function animaisDoencas(Animal $animal)
+    {
+        
     }
 }

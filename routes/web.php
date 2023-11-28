@@ -80,4 +80,13 @@ Route::prefix('user',2)->middleware('auth')->group(function() {
     Route::get('/doencas/{doenca}/edit', [DoencaController::class, 'edit'])->name('user.doencas.edit');
     Route::put('/doencas/update/{doenca}', [DoencaController::class, 'update'])->name('user.doencas.update');
 
+    Route::get('/animais', [AnimalController::class, 'privateIndex'])->name('user.animais.index');
+    Route::get('/animais/create', [AnimalController::class, 'create'])->name('user.animais.create');
+    Route::post('/animais/store', [AnimalController::class, 'store'])->name('user.animais.store');
+    Route::delete('/animais/{id}', [AnimalController::class, 'destroy'])->name('user.animais.destroy');
+    Route::get('/animais/{id}/edit', [AnimalController::class, 'edit'])->name('user.animais.edit');
+    Route::put('/animais/update/{id}', [AnimalController::class, 'update'])->name('user.animais.update');
+    Route::put('/animais/vacina/{id}', [AnimalController::class, 'animaisVacinas'])->name('user.animaisvacinas.update');
+    Route::get('/animais/doenca', [AnimalController::class, 'animaisDoencas'])->name('user.animaisdoencas.index');
+
 });
