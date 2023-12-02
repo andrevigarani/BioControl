@@ -11,6 +11,8 @@ use App\Http\Controllers\OcorrenciaController;
 use App\Http\Controllers\DadoController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\LogisticaReversaController;
+use App\Http\Controllers\AnimalVacinaController;
+use App\Http\Controllers\AnimalDoencaController;
 
 
 /*
@@ -86,7 +88,20 @@ Route::prefix('user',2)->middleware('auth')->group(function() {
     Route::delete('/animais/{id}', [AnimalController::class, 'destroy'])->name('user.animais.destroy');
     Route::get('/animais/{id}/edit', [AnimalController::class, 'edit'])->name('user.animais.edit');
     Route::put('/animais/update/{id}', [AnimalController::class, 'update'])->name('user.animais.update');
-    Route::get('/animais/{id}/vacinas', [AnimalController::class, 'animaisVacinas'])->name('user.animais.vacinas.index');
-    Route::get('/animais/{id}/doencas', [AnimalController::class, 'animaisDoencas'])->name('user.animais.doencas.index');
+
+    Route::get('/animais/{id}/vacinas', [AnimalVacinaController::class, 'privateIndex'])->name('user.animais.vacinas.index');
+    Route::get('/animais/{id}/vacinas/create', [AnimalVacinaController::class, 'create'])->name('user.animais.vacinas.create');
+    Route::post('/animais/{id}/vacinas/store', [AnimalVacinaController::class, 'store'])->name('user.animais.vacinas.store');
+    Route::delete('/animais/{id}/vacinas/{iddoenca}', [AnimalVacinaController::class, 'destroy'])->name('user.animais.vacinas.destroy');
+    Route::get('/animais/{id}/vacinas/{iddoenca}/edit', [AnimalVacinaController::class, 'edit'])->name('user.animais.vacinas.edit');
+    Route::put('/animais/{id}/vacinas/update/{iddoenca}', [AnimalVacinaController::class, 'update'])->name('user.animais.vacinas.update');
+
+    Route::get('/animais/{id}/doencas', [AnimalDoencaController::class, 'privateIndex'])->name('user.animais.doencas.index');
+    Route::get('/animais/{id}/doencas/create', [AnimalDoencaController::class, 'create'])->name('user.animais.doencas.create');
+    Route::post('/animais/{id}/doencas/store', [AnimalDoencaController::class, 'store'])->name('user.animais.doencas.store');
+    Route::delete('/animais/{id}/doencas/{iddoenca}', [AnimalDoencaController::class, 'destroy'])->name('user.animais.doencas.destroy');
+    Route::get('/animais/{id}/doencas/{iddoenca}/edit', [AnimalDoencaController::class, 'edit'])->name('user.animais.doencas.edit');
+    Route::put('/animais/{id}/doencas/update/{iddoenca}', [AnimalDoencaController::class, 'update'])->name('user.animais.doencas.update');
+
 
 });
