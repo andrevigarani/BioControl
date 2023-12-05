@@ -57,30 +57,30 @@
 
                 <div class="col-md-4 p-3">
                     <div class="card">
-                        <div class="card-header">DICAS</div>
+                        <div class="card-header">CACHORRO</div>
 
                         <div class="card-body">
-                            Lorem Ipsum
+                            Brinquedos mantêm a casa segura, eles terão onde gastar a energia.
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4 p-3">
                     <div class="card">
-                        <div class="card-header">DICAS</div>
+                        <div class="card-header">PETS</div>
 
                         <div class="card-body">
-                            Lorem Ipsum
+                            Faça despedidas curtas, sem drama, eles lidarão melhor com isso!
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4 p-3">
                     <div class="card">
-                        <div class="card-header">DICAS</div>
+                        <div class="card-header">CACHORRO</div>
 
                         <div class="card-body">
-                            Lorem Ipsum
+                            Diversão rima com alimentação! Opte por brinquedos com dispenser de ração e petiscos.
                         </div>
                     </div>
                 </div>

@@ -9,4 +9,11 @@ class Ocorrencia extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'titulo',
+        'tipo',
+        'endereco',
+        'descricao'
+    ];
+
 }

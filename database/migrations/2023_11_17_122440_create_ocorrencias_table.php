@@ -17,10 +17,8 @@ return new class extends Migration
             $table->char('tipo',1);
             $table->text('descricao');
             $table->text('endereco');
-            $table->unsignedBigInteger('id_pessoa_fisica');
             $table->timestamps();
 
-            $table->foreign('id_pessoa_fisica')->references('id')->on('pessoas_fisicas');
         });
     }
 

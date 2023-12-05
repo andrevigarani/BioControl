@@ -35,27 +35,27 @@
                 <hr class="border-white">
 
                 <ul class="nav flex-column">
-                    <li class="nav-item invert-nav-item">
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.animais')) bg-secondary @endif">
                         <a class="nav-link text-light" href="{{ route('user.animais.index') }}">
                             Animais
                         </a>
                     </li>
-                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'vacinas')) bg-secondary @endif">
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.vacinas')) bg-secondary @endif">
                         <a class="nav-link text-light" href="{{ route('user.vacinas.index') }}">
                             Vacinas
                         </a>
                     </li>
-                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'doencas')) bg-secondary @endif">
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.doencas')) bg-secondary @endif">
                         <a class="nav-link text-light" href="{{ route('user.doencas.index') }}">
                             Doenças
                         </a>
                     </li>
-                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'especies')) bg-secondary @endif">
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.especies')) bg-secondary @endif">
                         <a class="nav-link text-light" href="{{ route('user.especies.index') }}">
                             Espécies
                         </a>
                     </li>
-                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'racas')) bg-secondary @endif">
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.racas')) bg-secondary @endif">
                         <a class="nav-link text-light" href="{{ route('user.racas.index') }}">
                             Raças
                         </a>
@@ -75,7 +75,23 @@
                             Clínica Veterinária
                         </a>
                     </li>
-                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'contatos')) bg-secondary @endif">
+
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.pessoa_juridicas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.pessoa_juridicas.index') }}">
+                            Pessoa Jurídica
+                        </a>
+                    </li>
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.abrigos')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.abrigos.index') }}">
+                            Abrigos
+                        </a>
+                    </li>
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.clinicaveterinas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.clinicasVeterinarias.index') }}">
+                            Clínica Veterinária
+                        </a>
+                    </li>
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.contatos')) bg-secondary @endif">
                         <a class="nav-link text-light" href="{{ route('user.contatos.index') }}">
                             Contatos
                         </a>

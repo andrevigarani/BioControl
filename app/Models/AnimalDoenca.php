@@ -14,6 +14,16 @@ class AnimalDoenca extends Model
         'id_animal',
         'id_doenca',
         'data_inicio',
+        'data_cura',
     ];
 
+    public function doenca()
+    {
+        return $this->belongsTo(Doenca::class, 'id_doenca');
+    }
+
+    public function animal()
+    {
+        return $this->belongsTo(Animal::class, 'id_animal');
+    }
 }

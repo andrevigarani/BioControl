@@ -33,7 +33,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('user.animais.update', 1) }}" method="post">
+                    <form action="{{ route('user.animais.update', $animal->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-group">

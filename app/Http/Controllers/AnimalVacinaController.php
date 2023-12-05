@@ -2,129 +2,97 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnimalVacina;
 use App\Models\Animal;
+use App\Models\Vacina;
 use Illuminate\Http\Request;
-use App\Models\PessoaFisica;
 
 class AnimalVacinaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
 
-    public function adocaoIndex()
+    public function privateIndex(Animal $animal)
     {
-        return view('public.dev');
-    }
 
-    public function privateIndex()
-    {
-        $pesquisa = request('pesquisa');
+        $animal_vacinas = AnimalVacina::where('id_animal', '=', $animal->id)->with('vacina')->get();
 
-        $animais = Animal::when($pesquisa, function ($query) use ($pesquisa) {
-            return $query->where('nome', 'like', '%'.$pesquisa.'%');
-        })->with('pessoa_fisica')->get();
-
-        return view('private.animal.index', compact('animais'));
+        return view('private.animal.vacina.index', compact('animal_vacinas', 'animal'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Animal $animal)
     {
-        $pessoafisicas = PessoaFisica::all();
+        $vacinas = Vacina::all();
 
-        return view('private.animal.create', compact('pessoafisicas'));
+        return view('private.animal.vacina.create', compact('vacinas', 'animal'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Animal $animal)
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'nascimento' => 'required|date',
-            'falecimento' => 'nullable|date',
-            'castracao' => 'nullable|date',
-            'id_responsavel_animal' => 'required|exists:pessoas_fisicas,id',
+            'data_aplicacao' => 'required|date',
+            'id_vacina' => 'required|exists:vacinas,id',
         ]);
 
         try {
-            Animal::create([
-                'nome' => $request->input('nome'),
-                'nascimento' => $request->input('nascimento'),
-                'falecimento' => $request->input('falecimento'),
-                'castracao' => $request->input('castracao'),
-                'id_responsavel_animal' => $request->input('id_responsavel_animal'),
-                'id_raca' => 1,
-                'id_chip' => null,
-                'id_clinica_veterinaria' => null,
-                'id_abrigo' => null,
+            AnimalVacina::create([
+                'data_aplicacao' => $request->input('data_aplicacao'),
+                'id_vacina' => $request->input('id_vacina'),
+                'id_animal' => $animal->id,
             ]);
 
-            return redirect()->route('user.animais.index')->with('success', 'Animal cadastrado com sucesso!');
+            return redirect()->route('user.animais.vacinas.index', $animal->id)->with('success', 'Vacina cadastrada com sucesso!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Erro ao cadastrar o animal. Detalhes do erro: ' . $e->getMessage());
+            return back()->with('error', 'Erro ao cadastrar a vacina. Detalhes do erro: ' . $e->getMessage());
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Animal $animal)
-    {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Animal $animal)
+    public function edit(Animal $animal, AnimalVacina $animal_vacina)
     {
-        $pessoafisicas = PessoaFisica::all(); // Obtém todos os responsáveis para o campo de seleção
-        return view('private.animal.edit', compact('animal', 'pessoafisicas'));
+        $vacinas = Vacina::all();
+        return view('private.animal.vacina.edit', compact('animal', 'vacinas', 'animal_vacina'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Animal $animal)
+    public function update(Request $request, Animal $animal, AnimalVacina $animal_vacina)
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'nascimento' => 'required|date',
-            'falecimento' => 'nullable|date',
-            'castracao' => 'nullable|date',
-            'id_responsavel_animal' => 'required|exists:responsaveis,id',
+            'data_aplicacao' => 'required|date',
+            'id_vacina' => 'required|exists:vacinas,id',
         ]);
 
         try {
-            $animal->update([
-                'nome' => $request->input('nome'),
-                'nascimento' => $request->input('nascimento'),
-                'falecimento' => $request->input('falecimento'),
-                'castracao' => $request->input('castracao'),
-                'id_responsavel_animal' => $request->input('id_responsavel_animal'),
+            $animal_vacina->update([
+                'data_aplicacao' => $request->input('data_aplicacao'),
+                'id_vacina' => $request->input('id_vacina'),
+                'id_animal' => $animal->id,
             ]);
 
-            return redirect()->route('user.animais.index')->with('success', 'Animal atualizado com sucesso!');
+            return redirect()->route('user.animais.vacinas.index', $animal_vacina->id_animal)->with('success', 'Vacina atualizada com sucesso!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Erro ao atualizar o animal. Detalhes do erro: ' . $e->getMessage());
+            return back()->with('error', 'Erro ao atualizar a vacina. Detalhes do erro: ' . $e->getMessage());
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Animal $animal)
+    public function destroy(Animal $animal, AnimalVacina $animal_vacina)
     {
         try {
-            $animal->delete();
-            return redirect()->route('user.animais.index')->with('success', 'Animal excluído com sucesso!');
+            $animal_vacina->delete();
+            return redirect()->route('user.animais.vacinas.index', $animal_vacina->id_animal)->with('success', 'Vacina excluída com sucesso!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Erro ao excluir o animal. Detalhes do erro: ' . $e->getMessage());
+            return back()->with('error', 'Erro ao excluir a vacina. Detalhes do erro: ' . $e->getMessage());
         }
     }
 
