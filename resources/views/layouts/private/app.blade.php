@@ -59,6 +59,21 @@
                         <a class="nav-link text-light" href="{{ route('user.racas.index') }}">
                             Raças
                         </a>
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'pessoa_juridicas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.pessoa_juridicas.index') }}">
+                            Pessoa Jurídica
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'abrigos')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.abrigos.index') }}">
+                            Abrigos
+                        </a>
+                    </li>
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'clinicaveterinas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.clinicasVeterinarias.index') }}">
+                            Clínica Veterinária
+                        </a>
                     </li>
                     <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'contatos')) bg-secondary @endif">
                         <a class="nav-link text-light" href="{{ route('user.contatos.index') }}">

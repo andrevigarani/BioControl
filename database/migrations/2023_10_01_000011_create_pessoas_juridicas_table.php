@@ -21,9 +21,11 @@ return new class extends Migration
             $table->string('numero_endereco')->nullable();
             $table->string('complemento')->nullable();
             $table->unsignedBigInteger('id_rua');
+            $table->unsignedBigInteger('id_pessoa_fisica');
             $table->timestamps();
 
             $table->foreign('id_rua')->references('id')->on('ruas');
+            $table->foreign('id_pessoa_fisica')->references('id')->on('pessoas_fisicas');
         });
     }
 

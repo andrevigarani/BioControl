@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Animal;
 use Illuminate\Http\Request;
 use App\Models\PessoaFisica;
+use App\Models\Vacina;
 
 class AnimalController extends Controller
 {
@@ -19,6 +20,8 @@ class AnimalController extends Controller
 
     public function privateIndex()
     {
+        $animais = Animal::all();
+
         $pesquisa = request('pesquisa');
 
         $animais = Animal::when($pesquisa, function ($query) use ($pesquisa) {
@@ -48,6 +51,7 @@ class AnimalController extends Controller
             'nascimento' => 'required|date',
             'falecimento' => 'nullable|date',
             'castracao' => 'nullable|date',
+            'id_raca' => 'nullable|exists:racas,id',
             'id_responsavel_animal' => 'required|exists:pessoas_fisicas,id',
         ]);
 
@@ -90,6 +94,7 @@ class AnimalController extends Controller
     /**
      * Update the specified resource in storage.
      */
+     
     public function update(Request $request, Animal $animal)
     {
         $request->validate([
@@ -97,7 +102,7 @@ class AnimalController extends Controller
             'nascimento' => 'required|date',
             'falecimento' => 'nullable|date',
             'castracao' => 'nullable|date',
-            'id_responsavel_animal' => 'required|exists:responsaveis,id',
+            'id_responsavel_animal' => 'required|exists:pessoas_fisicas,id',
         ]);
 
         try {
@@ -135,11 +140,53 @@ class AnimalController extends Controller
         // Agora, você pode acessar as vacinas diretamente através do relacionamento
         $vacinas = $animal->vacinas;
 
-        return view('private.vacina.index', compact('animal', 'vacinas'));
+        return view('private.animal.vacina', compact('animal', 'vacinas'));
     }
 
-    public function animaisDoencas(Animal $animal)
+    /*public function animaisVacinasCreate($id)
     {
+        $animal = Animal::findOrFail($id);
+
+        // Agora, você pode acessar as vacinas diretamente através do relacionamento
+        $vacinas = $animal->vacinas;
+
+        return view('private.animal.vacina', compact('animal', 'vacinas'));
+    }*/
+    public function createVacina($id)
+        {
+            $animal = Animal::findOrFail($id);
+            $vacinas = Vacina::all();
+            return view('private.animal.createvacina', compact('animal', 'vacinas'));
+        }
+
+    public function storeVacina(Request $request, $id)
+    {
+        try {
+        // Validação dos dados do formulário
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'data_aplicacao' => 'required|date',
+        ]);
+
+        // Crie a vacina e associe ao animal
+        $animal = Animal::findOrFail($id);
+        $vacina = new Vacina([
+            'nome' => $request->input('nome'),
+            'descricao' => $request->input('descricao'),
+            'data_aplicacao' => $request->input('data_aplicacao'),
+        ]);
+
+        $animal->vacinas()->save($vacina);
+
+        return redirect()->route('user.animais.index')->with('success', 'Vacina cadastrada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao cadastrar o animal. Detalhes do erro: ' . $e->getMessage());
+        }
+    }
+
+        public function animaisDoencas(Animal $animal)
+        {
 
     }
 }
