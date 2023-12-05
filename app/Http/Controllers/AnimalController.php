@@ -128,18 +128,4 @@ class AnimalController extends Controller
         }
     }
 
-    public function animaisVacinas($id)
-    {
-        $animal = Animal::findOrFail($id);
-
-        // Agora, você pode acessar as vacinas diretamente através do relacionamento
-        $vacinas = $animal->vacinas;
-
-        return view('private.vacina.index', compact('animal', 'vacinas'));
-    }
-
-    public function animaisDoencas(Animal $animal)
-    {
-
-    }
 }

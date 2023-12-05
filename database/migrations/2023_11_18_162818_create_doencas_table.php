@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreign('id_doenca')->references('id')->on('doencas');
 
             $table->date('data_inicio');
-            $table->date('data_cura');
+            $table->date('data_cura')->nullable();
 
             $table->timestamps();
         });

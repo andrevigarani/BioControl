@@ -54,6 +54,7 @@
                         <div class="form-group">
                             <label for="id_responsavel_animal">Responsável:</label>
                             <select name="id_responsavel_animal" class="form-control" required>
+                                <option value="">Selecione um responsável</option>
                                 @foreach($pessoafisicas as $pessoafisica)
                                     <option value="{{ $pessoafisica->id }}" {{ old('id_responsavel_animal') == $pessoafisica->id ? 'selected' : '' }}>
                                         {{ $pessoafisica->nome }}

@@ -95,7 +95,7 @@
                                 </a>
                             </li>
                             <li class="nav-item w-100 h-100 text-center invert-nav-item @if(str_contains(Route::currentRouteName(),'ocorrencias')) bg-success @endif">
-                                <a class="nav-link text-light" href="{{ route('ocorrencias.index') }}">
+                                <a class="nav-link text-light" href="{{ route('ocorrencias.create') }}">
                                     OCORRÊNCIAS
                                 </a>
                             </li>

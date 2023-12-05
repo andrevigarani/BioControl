@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label for="especie">Espécie:</label>
                             <select class="form-control" name="especie">
-                                <option value="" disabled>Escolha uma espécie</option>
+                                <option value="">Selecione uma espécie</option>
                                 @foreach ($especies as $especie)
                                     <option value="{{ $especie->id }}" @if(old('especie') == $especie->id) selected @endif>{{ $especie->nome }}</option>
                                 @endforeach
