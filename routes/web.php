@@ -105,5 +105,25 @@ Route::prefix('user',2)->middleware('auth')->group(function() {
     Route::get('/animais/{animal}/doencas/{animal_doenca}/edit', [AnimalDoencaController::class, 'edit'])->name('user.animais.doencas.edit');
     Route::put('/animais/{animal}/doencas/update/{animal_doenca}', [AnimalDoencaController::class, 'update'])->name('user.animais.doencas.update');
 
+    Route::get('/abrigos', [AbrigoController::class, 'index'])->name('user.abrigos.index');
+    Route::get('/abrigos/create', [AbrigoController::class, 'create'])->name('user.abrigos.create');
+    Route::post('/abrigos/store', [AbrigoController::class, 'store'])->name('user.abrigos.store');
+    Route::delete('/abrigos/{id}', [AbrigoController::class, 'destroy'])->name('user.abrigos.destroy');
+    Route::get('/abrigos/{id}/edit', [AbrigoController::class, 'edit'])->name('user.abrigos.edit');
+    Route::put('/abrigos/update/{id}', [AbrigoController::class, 'update'])->name('user.abrigos.update');
+
+    Route::get('/clinicaveterinaria', [ClinicaVeterinariaController::class, 'index'])->name('user.clinicasVeterinarias.index');
+    Route::get('/clinicaveterinaria/create', [ClinicaVeterinariaController::class, 'create'])->name('user.clinicasVeterinarias.create');
+    Route::post('/clinicaveterinaria/store', [ClinicaVeterinariaController::class, 'store'])->name('user.clinicasVeterinarias.store');
+    Route::delete('/clinicaveterinaria/{id}', [ClinicaVeterinariaController::class, 'destroy'])->name('user.clinicasVeterinarias.destroy');
+    Route::get('/clinicaveterinaria/{id}/edit', [ClinicaVeterinariaController::class, 'edit'])->name('user.clinicasVeterinarias.edit');
+    Route::put('/clinicaveterinaria/update/{id}', [ClinicaVeterinariaController::class, 'update'])->name('user.clinicasVeterinarias.update');
+
+    Route::get('/pessoajuridica', [PessoaJuridicaController::class, 'index'])->name('user.pessoa_juridicas.index');
+    Route::get('/pessoajuridica/create', [PessoaJuridicaController::class, 'create'])->name('user.pessoa_juridicas.create');
+    Route::post('/pessoajuridica/store', [PessoaJuridicaController::class, 'store'])->name('user.pessoa_juridicas.store');
+    Route::delete('/pessoajuridica/{id}', [PessoaJuridicaController::class, 'destroy'])->name('user.pessoa_juridicas.destroy');
+    Route::get('/pessoajuridica/{id}/edit', [PessoaJuridicaController::class, 'edit'])->name('user.pessoa_juridicas.edit');
+    Route::put('/pessoajuridica/update/{id}', [PessoaJuridicaController::class, 'update'])->name('user.pessoa_juridicas.update');
 
 });
