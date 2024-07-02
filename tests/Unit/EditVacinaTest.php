@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\VacinaController;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
+ */
 class EditVacinaTest extends TestCase
 {
     public function test_ct15_edit_vaccine()

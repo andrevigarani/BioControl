@@ -2,85 +2,87 @@
 
 namespace Tests\Feature;
 
-use App\Http\Controllers\AnimalController;
-use App\Models\Animal;
+use App\Models\Raca;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
+/**
+ * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
+ */
 class CreateAnimalTest extends TestCase
 {
-    use RefreshDatabase; // Para garantir um banco de dados limpo para cada teste
+    use RefreshDatabase;
 
-    public function test_ct01_valid_animal_registration()
+    protected function setUp(): void
     {
-        // Criar um usuário mockado
-        $user = $this->mock(User::class);
-        $user->shouldReceive('id')->andReturn(1);
-        $user->email = 'andre@example.com';
-        $user->password = Hash::make('123456789');
+        parent::setUp();
+        // Se necessário, configure quaisquer pré-condições adicionais aqui
+    }
 
-        // Simular login do usuário
-        $this->mockAuthenticatedUser($user);
+    /** @test */
+    public function ct01_valid_animal_registration()
+    {
+        // Cria um usuário e loga
+        $user = User::factory()->create([
+            'email' => 'andre@example.com',
+            'password' => bcrypt('12345678'),
+        ]);
 
-        // Dados do animal para cadastro
+        $this->actingAs($user);
+
+        $raca = Raca::factory()->create();
+
+        // Dados para cadastro do animal
         $animalData = [
             'nome' => 'tobi',
             'nascimento' => '2015-04-06',
+            'id_responsavel_animal' => $user->id_pessoa_fisica,
+            'id_raca' => $raca->id,
         ];
 
-        // Mock do método create no AnimalController
-        $this->mock(AnimalController::class, function ($mock) use ($animalData) {
-            $mock->shouldReceive('create')->once()->andReturn(Animal::create($animalData));
-        });
+        // Faz a requisição para criar o animal
+        $response = $this->post('/user/animais/store', $animalData);
 
-        // Requisição para cadastrar o animal
-        $response = $this->post(route('animal.store'), $animalData);
-
-        // Verificar se o animal foi criado corretamente
-        $response->assertSessionHas('success', 'Animal cadastrado com sucesso!');
-        $this->assertDatabaseHas('animals', $animalData);
+        // Verifica se o animal foi registrado corretamente
+        $response->assertStatus(302); // Redirecionado após sucesso
+        $this->assertDatabaseHas('animais', [
+            'nome' => 'tobi',
+            'nascimento' => '2015-04-06',
+            'id_responsavel_animal' => $user->id_pessoa_fisica,
+        ]);
     }
 
-    public function test_ct02_null_value_in_animal_registration()
+    /** @test */
+    public function ct02_invalid_animal_registration_missing_name()
     {
-        // Criar um usuário mockado
-        $user = $this->mock(User::class);
-        $user->shouldReceive('id')->andReturn(1);
-        $user->email = 'andre@example.com';
-        $user->password = Hash::make('123456789');
+        // Cria um usuário e loga
+        $user = User::factory()->create([
+            'email' => 'andre@example.com',
+            'password' => bcrypt('12345678'),
+        ]);
 
-        // Simular login do usuário
         $this->actingAs($user);
 
-        // Dados do animal para cadastro com nome nulo
+        $raca = Raca::factory()->create();
+
+        // Dados para cadastro do animal sem o nome
         $animalData = [
-            'nome' => '', // Nome nulo
+            'nome' => '',
             'nascimento' => '2015-04-06',
+            'id_responsavel_animal' => $user->id_pessoa_fisica,
+            'id_raca' => $raca->id,
         ];
 
-        // Mock do método create no AnimalController
-        $this->mockAnimalController($animalData);
+        // Faz a requisição para criar o animal
+        $response = $this->post('/user/animais/store', $animalData);
 
-        $this->mock(AnimalController::class, function ($mock) use ($animalData) {
-            $mock->shouldReceive('create')->once()->andReturn(Animal::create($animalData));
-        });
-
-        // Requisição para cadastrar o animal
-        $response = $this->post(route('animal.store'), $animalData);
-
-        // Verificar se houve erro de validação esperado
-        $response->assertSessionHasErrors(['nome']);
-
-        // Verificar se o animal não foi cadastrado
-        $this->assertDatabaseMissing('animals', $animalData);
-    }
-
-    private function mockAnimalController($animalData)
-    {
-        $this->mock(\App\Http\Controllers\AnimalController::class, function ($mock) use ($animalData) {
-            $mock->shouldReceive('create')->once()->andReturn(Animal::create($animalData));
-        });
+        // Verifica se o sistema retorna erro de validação
+        $response->assertSessionHasErrors('nome');
+        $this->assertDatabaseMissing('animais', [
+            'nascimento' => '2015-04-06',
+            'id_responsavel_animal' => $user->id_pessoa_fisica,
+        ]);
     }
 }

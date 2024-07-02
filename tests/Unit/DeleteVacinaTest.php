@@ -8,6 +8,10 @@ use Mockery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\VacinaController;
 
+/**
+ * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
+ */
 class DeleteVacinaTest extends TestCase
 {
     public function test_ct16_delete_vaccine()
