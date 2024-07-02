@@ -96,11 +96,11 @@
                             Contatos
                         </a>
                     </li>
-{{--                    <li class="nav-item invert-nav-item">--}}
-{{--                        <a class="nav-link text-light" href="#">--}}
-{{--                            Usuários--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li class="nav-item invert-nav-item @if(str_contains(Route::currentRouteName(),'user.dicas')) bg-secondary @endif">
+                        <a class="nav-link text-light" href="{{ route('user.dicas.index') }}">
+                            Dicas
+                        </a>
+                    </li>
                 </ul>
 
                 <hr class="border-white">

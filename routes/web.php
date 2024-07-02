@@ -16,6 +16,7 @@ use App\Http\Controllers\AnimalDoencaController;
 use App\Http\Controllers\ClinicaVeterinariaController;
 use App\Http\Controllers\AbrigoController;
 use App\Http\Controllers\PessoaJuridicaController;
+use App\Http\Controllers\DicaController;
 
 
 /*
@@ -128,5 +129,12 @@ Route::prefix('user',2)->middleware('auth')->group(function() {
     Route::delete('/pessoajuridica/{id}', [PessoaJuridicaController::class, 'destroy'])->name('user.pessoa_juridicas.destroy');
     Route::get('/pessoajuridica/{id}/edit', [PessoaJuridicaController::class, 'edit'])->name('user.pessoa_juridicas.edit');
     Route::put('/pessoajuridica/update/{id}', [PessoaJuridicaController::class, 'update'])->name('user.pessoa_juridicas.update');
+
+    Route::get('/dicas', [DicaController::class, 'privateIndex'])->name('user.dicas.index');
+    Route::get('/dicas/create', [DicaController::class, 'create'])->name('user.dicas.create');
+    Route::post('/dicas/store', [DicaController::class, 'store'])->name('user.dicas.store');
+    Route::delete('/dicas/{id}', [DicaController::class, 'destroy'])->name('user.dicas.destroy');
+    Route::get('/dicas/{id}/edit', [DicaController::class, 'edit'])->name('user.dicas.edit');
+    Route::put('/dicas/update/{id}', [DicaController::class, 'update'])->name('user.dicas.update');
 
 });

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dicas', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->text('frase');
+            $table->text('descricao');
             $table->timestamps();
         });
     }
